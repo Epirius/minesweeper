@@ -1,20 +1,21 @@
 from board import Board
 size = 12
-mines = 10
+mines = 13
 
 
 def main():
 	board = Board(size, mines)
+	print("\n" * 50)
 	print(board.draw_board())
 
 	while True:
 		xy = xy_input()
+		print("\n" * 50)
 		update = board.update_board((xy[0], xy[1]))
 		if update == False:
-			input("You hit a mine!")
 			print("\n" * 50)
 			print(board.reveal_board())
-			input()
+			input("You hit a mine!")
 			break
 		else:
 			print(update)

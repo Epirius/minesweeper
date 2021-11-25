@@ -1,1 +1,6 @@
--reveal numbers around the position i picked!
+-numbers at the edge without bombs should not be there.
+	-the end of x or y wraps around, but it only works from high to low
+-maybe placement of mines should not be 100% random.
+
+
+hard: make shure the first position is not a mine.

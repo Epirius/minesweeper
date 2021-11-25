@@ -137,6 +137,14 @@ class Board:
 					self.flood_fill(x, y - 1)
 				if y < self.size:
 					self.flood_fill(x, y + 1)
+				if x < self.size and y < self.size:
+					self.flood_fill(x + 1, y + 1)
+				if x > 0 and y > 0:
+					self.flood_fill(x - 1, y - 1)
+				if x > 0 and y < self.size:
+					self.flood_fill(x - 1, y + 1)
+				if x < self.size and y > 0:
+					self.flood_fill(x + 1, y - 1)
 			except:
 				pass
 
