@@ -43,9 +43,6 @@ def xy_input():
 		if coordinates[0] not in range(1, size + 1) or coordinates[1] not in range(1, size + 1):
 			print(f"Invalid input: x and y need to be between 1 and {size}")
 			continue
-		# if board.check_pos(coordinates) is not True:
-		# 	print("Invalid position: occupied square")
-		# 	continue
 		return coordinates
 
 
