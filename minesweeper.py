@@ -36,13 +36,21 @@ def xy_input():
 		if len(coordinates) != 2:
 			print("Invalid input: expected 2 numbers")
 			continue
-
-		coordinates[0] = int(coordinates[0])
-		coordinates[1] = int(coordinates[1])
+		try:
+			coordinates[0] = int(coordinates[0])
+		except ValueError:
+			print("Invalid input: x and y must be integers")
+			continue
+		try:
+			coordinates[1] = int(coordinates[1])
+		except ValueError:
+			print("Invalid input: x and y must be integers")
+			continue
 
 		if coordinates[0] not in range(1, size + 1) or coordinates[1] not in range(1, size + 1):
 			print(f"Invalid input: x and y need to be between 1 and {size}")
 			continue
+
 		return coordinates
 
 

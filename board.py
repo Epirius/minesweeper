@@ -80,42 +80,35 @@ class Board:
 			#add a mine to the mine position, and add 1 to all adjecent spots
 			x = mine[0]
 			y = mine[1]
+
 			mine_board[y][x] = "◉"  # negative = mine
 
-			try:
-				mine_board[y - 1][x - 1] += 1
-			except Exception:
-				pass
-			try:
-				mine_board[y - 1][x + 1] += 1
-			except Exception:
-				pass
-			try:
-				mine_board[y - 1][x] += 1
-			except Exception:
-				pass
+			if x > 0 and y > 0:
+				if mine_board[y - 1][x - 1] != "◉":
+					mine_board[y - 1][x - 1] += 1
+			if x < self.size - 1 and y > 0:
+				if mine_board[y - 1][x + 1] != "◉":
+					mine_board[y - 1][x + 1] += 1
+			if y > 0:
+				if mine_board[y - 1][x] != "◉":
+					mine_board[y - 1][x] += 1
 
-			try:
-				mine_board[y][x - 1] += 1
-			except Exception:
-				pass
-			try:
-				mine_board[y][x + 1] += 1
-			except Exception:
-				pass
+			if x > 0:
+				if mine_board[y][x - 1] != "◉":
+					mine_board[y][x - 1] += 1
+			if x < self.size - 1:
+				if mine_board[y][x + 1] != "◉":
+					mine_board[y][x + 1] += 1
 
-			try:
-				mine_board[y + 1][x - 1] += 1
-			except Exception:
-				pass
-			try:
-				mine_board[y + 1][x + 1] += 1
-			except Exception:
-				pass
-			try:
-				mine_board[y + 1][x] += 1
-			except Exception:
-				pass
+			if x > 0 and y < self.size - 1:
+				if mine_board[y + 1][x - 1] != "◉":
+					mine_board[y + 1][x - 1] += 1
+			if x < self.size - 1 and y < self.size - 1:
+				if mine_board[y + 1][x + 1] != "◉":
+					mine_board[y + 1][x + 1] += 1
+			if y < self.size - 1:
+				if mine_board[y + 1][x] != "◉":
+					mine_board[y + 1][x] += 1
 
 		return mine_board
 
