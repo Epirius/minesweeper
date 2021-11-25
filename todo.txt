@@ -1,0 +1,1 @@
+-reveal numbers around the position i picked!

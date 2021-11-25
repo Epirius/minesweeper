@@ -1,6 +1,52 @@
 from board import Board
+size = 12
+mines = 10
 
-board = Board(12, 10)
-# print(board.draw_board())
 
-print(board.update_board((2, 5)))
+def main():
+	board = Board(size, mines)
+	print(board.draw_board())
+
+	while True:
+		xy = xy_input()
+		update = board.update_board((xy[0], xy[1]))
+		if update == False:
+			input("You hit a mine!")
+			print("\n" * 50)
+			print(board.reveal_board())
+			input()
+			break
+		else:
+			print(update)
+			if board.check_winning():
+				print("\n" * 50)
+				print(board.reveal_board())
+				input("you won!")
+				break
+
+
+def xy_input():
+	"""Returns x,y from user input
+	"""
+	while True:
+		coordinates = input("Position (x,y): ")
+		coordinates = coordinates.split(",")
+
+		if len(coordinates) != 2:
+			print("Invalid input: expected 2 numbers")
+			continue
+
+		coordinates[0] = int(coordinates[0])
+		coordinates[1] = int(coordinates[1])
+
+		if coordinates[0] not in range(1, size + 1) or coordinates[1] not in range(1, size + 1):
+			print(f"Invalid input: x and y need to be between 1 and {size}")
+			continue
+		# if board.check_pos(coordinates) is not True:
+		# 	print("Invalid position: occupied square")
+		# 	continue
+		return coordinates
+
+
+if __name__ == "__main__":
+	main()

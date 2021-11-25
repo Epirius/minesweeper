@@ -140,6 +140,26 @@ class Board:
 			except:
 				pass
 
+	def reveal_board(self):
+		for x in range(self.size):
+			for y in range(self.size):
+				if self.board_data[y][x] == " ◌ ":
+					if self.mine_board[y][x] == "◉":
+						self.board_data[y][x] = " ◉ "
+					elif self.mine_board[y][x] == 0:
+						self.board_data[y][x] = "   "
+					elif self.mine_board[y][x] > 0:
+						self.board_data[y][x] = " " + str(self.mine_board[y][x]) + " "
+		return self.draw_board()
+
+	def check_winning(self):
+		flag = True
+		for x in range(self.size):
+			for y in range(self.size):
+				if self.board_data[y][x] == " ◌ " and self.mine_board[y][x] != "◉":
+					flag = False
+		return flag
+
 	def update_board(self, position):
 		"""Takes position [x,y] as input
 			returns a updated board as a string
@@ -157,7 +177,5 @@ class Board:
 
 		else:
 			self.flood_fill(x, y)
-
-		print(self.mine_board)
 
 		return self.draw_board()
