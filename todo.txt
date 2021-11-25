@@ -1,7 +1,8 @@
--numbers at the edge without bombs should not be there.
-	-the end of x or y wraps around, but it only works from high to low
 -maybe placement of mines should not be 100% random.
 -add flagging of mines.
 
 
-hard: make shure the first position is not a mine.
+hard: 
+-make shure the first position is not a mine.
+	-wait with spawning mines untill the player has made the first move.
+-make a solver, and make shure the generated bord can be solved. else generate a new one.
