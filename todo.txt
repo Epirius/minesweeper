@@ -3,6 +3,4 @@
 
 
 hard: 
--make shure the first position is not a mine.
-	-wait with spawning mines untill the player has made the first move.
 -make a solver, and make shure the generated bord can be solved. else generate a new one.

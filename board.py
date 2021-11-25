@@ -8,7 +8,7 @@ class Board:
 	def __init__(self, size, mine_numbers):
 		self.size = size
 		self.board_data = self.create_board(self.size)
-		self.mine_board = self.generate_mine_board(mine_numbers)
+		self.mine_numbers = mine_numbers
 
 	def create_board(self, size):
 		board_data = []
@@ -56,10 +56,10 @@ class Board:
 				drawn_board += f"  {number}"
 		return drawn_board
 
-	def generate_mines(self, mine_numbers):
+	def generate_mines(self):
 		mine_list = []
 
-		while len(mine_list) < mine_numbers:
+		while len(mine_list) < self.mine_numbers:
 			x = randrange(self.size)
 			y = randrange(self.size)
 
@@ -67,8 +67,8 @@ class Board:
 				mine_list.append((x, y))
 		return mine_list
 
-	def generate_mine_board(self, mine_numbers):
-		mine_list = self.generate_mines(mine_numbers)
+	def generate_mine_board(self):
+		mine_list = self.generate_mines()
 		mine_board = []
 		for x in range(self.size):
 			line = []
@@ -111,6 +111,15 @@ class Board:
 					mine_board[y + 1][x] += 1
 
 		return mine_board
+
+	def find_valid_starting_mine_board(self, x, y):
+		#making shure the first x,y input fits
+		mine_board_candidate = []
+		while True:
+			mine_board_candidate = self.generate_mine_board()
+			if mine_board_candidate[y][x] == 0:
+				break
+		self.mine_board = mine_board_candidate
 
 	def flood_fill(self, x, y):
 		if self.board_data[y][x] == " ◌ " and self.mine_board[y][x] == "◉":

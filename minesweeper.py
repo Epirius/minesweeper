@@ -5,11 +5,16 @@ mines = 13
 
 def main():
 	board = Board(size, mines)
+
 	print("\n" * 50)
 	print(board.draw_board())
 
+	first_round = True
 	while True:
 		xy = xy_input()
+		if first_round:
+			board.find_valid_starting_mine_board(xy[0], xy[1])
+			first_round = False
 		print("\n" * 50)
 		update = board.update_board((xy[0], xy[1]))
 		if update == False:
