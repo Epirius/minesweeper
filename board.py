@@ -117,7 +117,8 @@ class Board:
 		mine_board_candidate = []
 		while True:
 			mine_board_candidate = self.generate_mine_board()
-			if mine_board_candidate[y][x] == 0:
+			if mine_board_candidate[y - 1][x - 1] == 0:
+				print(mine_board_candidate)
 				break
 		self.mine_board = mine_board_candidate
 
@@ -153,7 +154,7 @@ class Board:
 	def reveal_board(self):
 		for x in range(self.size):
 			for y in range(self.size):
-				if self.board_data[y][x] == " ◌ ":
+				if self.board_data[y][x] in [" ◌ ", " ▶ "]:
 					if self.mine_board[y][x] == "◉":
 						self.board_data[y][x] = " ◉ "
 					elif self.mine_board[y][x] == 0:
@@ -170,13 +171,20 @@ class Board:
 					flag = False
 		return flag
 
-	def update_board(self, position):
+	def update_board(self, position, flag=False):
 		"""Takes position [x,y] as input
 			returns a updated board as a string
 		"""
 
 		x = position[0] - 1
 		y = position[1] - 1
+
+		if flag == True:
+			if self.board_data[y][x] == " ◌ ":
+				self.board_data[y][x] = " ▶ "
+			elif self.board_data[y][x] == " ▶ ":
+				self.board_data[y][x] = " ◌ "
+			return self.draw_board()
 
 		if self.mine_board[y][x] == "◉":
 			self.board_data[y][x] = " ◉ "

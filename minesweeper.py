@@ -7,6 +7,8 @@ def main():
 	board = Board(size, mines)
 
 	print("\n" * 50)
+	print("use '-' between x and y if you want to place a flag. else use ','")
+	print("\n" * 2)
 	print(board.draw_board())
 
 	first_round = True
@@ -16,27 +18,37 @@ def main():
 			board.find_valid_starting_mine_board(xy[0], xy[1])
 			first_round = False
 		print("\n" * 50)
-		update = board.update_board((xy[0], xy[1]))
-		if update == False:
-			print("\n" * 50)
-			print(board.reveal_board())
-			input("You hit a mine!")
-			break
-		else:
-			print(update)
-			if board.check_winning():
+
+		if xy[2] == False:  # normal move (not placing a flag)
+			xy.pop()
+			update = board.update_board((xy[0], xy[1]))
+			if update == False:
 				print("\n" * 50)
 				print(board.reveal_board())
-				input("you won!")
+				input("You hit a mine!")
 				break
+			else:
+				print(update)
+				if board.check_winning():
+					print("\n" * 50)
+					print(board.reveal_board())
+					input("you won!")
+					break
+		else:  # player is placing a flag
+			print(board.update_board((xy[0], xy[1]), xy[2]))
 
 
 def xy_input():
 	"""Returns x,y from user input
 	"""
 	while True:
+		flag_coordinates = False
 		coordinates = input("Position (x,y): ")
-		coordinates = coordinates.split(",")
+		if "," in coordinates:
+			coordinates = coordinates.split(",")
+		elif "-" in coordinates:
+			coordinates = coordinates.split("-")
+			flag_coordinates = True
 
 		if len(coordinates) != 2:
 			print("Invalid input: expected 2 numbers")
@@ -56,6 +68,7 @@ def xy_input():
 			print(f"Invalid input: x and y need to be between 1 and {size}")
 			continue
 
+		coordinates.append(flag_coordinates)
 		return coordinates
 
 
