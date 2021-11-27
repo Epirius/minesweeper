@@ -7,18 +7,12 @@ class Board:
 
 	def __init__(self, size, mine_numbers):
 		self.size = size
+		self.default_content = " ◌ "
 		self.board_data = self.create_board(self.size)
 		self.mine_numbers = mine_numbers
 
 	def create_board(self, size):
-		board_data = []
-		for x in range(size):
-			row = []
-			for y in range(size):
-				#this is the "default" icon.
-				row.append(" ◌ ")
-			board_data.append(row)
-		return board_data
+		return [[self.default_content for x in range(self.size)] for y in range(self.size)]
 
 	def internal_board(self):
 		internal_board = ""
