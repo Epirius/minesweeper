@@ -97,25 +97,11 @@ class Board:
 
 		elif self.board_data[y][x] == " ◌ " and self.mine_board[y][x] == 0:
 			self.board_data[y][x] = "   "
-			try:
-				if x > 0:
-					self.flood_fill(x - 1, y)
-				if x < self.size:
-					self.flood_fill(x + 1, y)
-				if y > 0:
-					self.flood_fill(x, y - 1)
-				if y < self.size:
-					self.flood_fill(x, y + 1)
-				if x < self.size and y < self.size:
-					self.flood_fill(x + 1, y + 1)
-				if x > 0 and y > 0:
-					self.flood_fill(x - 1, y - 1)
-				if x > 0 and y < self.size:
-					self.flood_fill(x - 1, y + 1)
-				if x < self.size and y > 0:
-					self.flood_fill(x + 1, y - 1)
-			except:
-				pass
+
+			for x_ in range(x - 1, x + 2):
+				for y_ in range(y - 1, y + 2):
+					if 0 <= x_ < self.size and 0 <= y_ < self.size:
+						self.flood_fill(x_, y_)
 
 	def reveal_board(self):
 		for x in range(self.size):
