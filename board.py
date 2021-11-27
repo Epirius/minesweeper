@@ -77,33 +77,10 @@ class Board:
 
 			mine_board[y][x] = "◉"  # negative = mine
 
-			if x > 0 and y > 0:
-				if mine_board[y - 1][x - 1] != "◉":
-					mine_board[y - 1][x - 1] += 1
-			if x < self.size - 1 and y > 0:
-				if mine_board[y - 1][x + 1] != "◉":
-					mine_board[y - 1][x + 1] += 1
-			if y > 0:
-				if mine_board[y - 1][x] != "◉":
-					mine_board[y - 1][x] += 1
-
-			if x > 0:
-				if mine_board[y][x - 1] != "◉":
-					mine_board[y][x - 1] += 1
-			if x < self.size - 1:
-				if mine_board[y][x + 1] != "◉":
-					mine_board[y][x + 1] += 1
-
-			if x > 0 and y < self.size - 1:
-				if mine_board[y + 1][x - 1] != "◉":
-					mine_board[y + 1][x - 1] += 1
-			if x < self.size - 1 and y < self.size - 1:
-				if mine_board[y + 1][x + 1] != "◉":
-					mine_board[y + 1][x + 1] += 1
-			if y < self.size - 1:
-				if mine_board[y + 1][x] != "◉":
-					mine_board[y + 1][x] += 1
-
+			for x_ in range(x - 1, x + 2):
+				for y_ in range(y - 1, y + 2):
+					if 0 <= x_ < self.size and 0 <= y_ < self.size and mine_board[y_][x_] != "◉":
+						mine_board[y_][x_] += 1
 		return mine_board
 
 	def find_valid_starting_mine_board(self, x, y):
