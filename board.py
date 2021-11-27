@@ -63,12 +63,7 @@ class Board:
 
 	def generate_mine_board(self):
 		mine_list = self.generate_mines()
-		mine_board = []
-		for x in range(self.size):
-			line = []
-			for y in range(self.size):
-				line.append(0)
-			mine_board.append(line)
+		mine_board = ([[0 for y in range(self.size)] for x in range(self.size)])
 
 		for mine in mine_list:
 			#add a mine to the mine position, and add 1 to all adjecent spots
