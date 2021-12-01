@@ -43,17 +43,28 @@ class Box():
 		if matrix[y][x] != self.value:
 			self.value = matrix[y][x]
 
-			for i in range(1, 9):
-				if self.value == i:
-					self.image = box_num[i]
-			if self.value == "1":
-				self.image = box_num[1]
-			if self.value == "▶":
-				self.image = box_flag
-			if self.value == "◉":
-				self.image = box_mine
 			if self.value == " ":
 				self.image = box_empty
+			elif self.value == "▶":
+				self.image = box_flag
+			elif self.value == "◉":
+				self.image = box_mine
+			elif self.value == "1":
+				self.image = box_num[1]
+			elif self.value == "2":
+				self.image = box_num[2]
+			elif self.value == "3":
+				self.image = box_num[3]
+			elif self.value == "4":
+				self.image = box_num[4]
+			elif self.value == "5":
+				self.image = box_num[5]
+			elif self.value == "6":
+				self.image = box_num[6]
+			elif self.value == "7":
+				self.image = box_num[7]
+			elif self.value == "8":
+				self.image = box_num[8]
 
 		screen.blit(self.image, (self.rect.x, self.rect.y))
 
@@ -89,7 +100,7 @@ while run:
 
 			if first_click:
 				board.find_valid_starting_mine_board(x, y)
-				first_round = False
+				first_click = False
 
 			update = board.update_board((x, y))
 			if update == False:

@@ -88,7 +88,7 @@ class Board:
 		return flag
 
 	def update_board(self, position, flag=False):
-		"""Takes position [x,y] as input
+		"""Takes position (x,y) as input
 			returns a updated board as a string
 		"""
 
