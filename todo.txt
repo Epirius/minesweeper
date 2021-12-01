@@ -1,5 +1,4 @@
 -maybe placement of mines should not be 100% random.
--bug: sometimes the first move is a number
 
 
 hard: 
