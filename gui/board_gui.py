@@ -77,7 +77,7 @@ class Board:
 					elif self.mine_board[y][x] > 0:
 						self.board_data[y][x] = str(self.mine_board[y][x])
 		#TODO: draw_board needs to be replaced
-		return self.draw_board()
+		return self.board_data
 
 	def check_winning(self):
 		flag = True
@@ -86,6 +86,9 @@ class Board:
 				if self.board_data[y][x] == "◌" and self.mine_board[y][x] != "◉":
 					flag = False
 		return flag
+
+	def get_board_data(self):
+		return self.board_data
 
 	def update_board(self, position, flag=False):
 		"""Takes position (x,y) as input
@@ -104,7 +107,8 @@ class Board:
 
 		if self.mine_board[y][x] == "◉":
 			self.board_data[y][x] = "◉"
-			return False
+			# return self.board_data
+			return self.board_data
 
 		elif isinstance(self.mine_board[y][x], int) and self.mine_board[y][x] > 0:
 			self.board_data[y][x] = str(self.mine_board[y][x])

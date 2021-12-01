@@ -78,20 +78,33 @@ for y in range(board_size):
 		name = Box(x * box_size, y * box_size, box_default)
 		box_matrix.append(name)
 
+
 #game loop
 run = True
 first_click = True
+game_over = False
+won = False
 while run:
 
 	screen.fill((76, 76, 76))
-	for box in box_matrix:
-		box.draw(matrix)
 
 	mouse_location = pygame.mouse.get_pos()
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			run = False
+
+		if won:
+			print("won")
+			matrix = board.reveal_board()
+			continue
+
+		if game_over:
+			print("game_over")
+			# run = False
+			matrix = board.reveal_board()
+			continue
+
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			x = int(mouse_location[0] / 64)
 			y = int(mouse_location[1] / 64)
@@ -101,27 +114,25 @@ while run:
 			if first_click:
 				board.find_valid_starting_mine_board(x, y)
 				first_click = False
-
 			update = board.update_board((x, y))
-			if update == False:
-				#TODO: make an animation here
-				print(board.reveal_board())
-				input("You hit a mine!")
-				break
-			else:
-				matrix = update
-				# print(matrix)
-				if board.check_winning():
-					#TODO: display win screen
-					print(board.reveal_board())
-					input("you won!")
-					break
+
+			# print(matrix)
+			if board.check_winning():
+				#TODO: display win screen
+				won = True
+				continue
+
+			matrix = update
 
 		# if "event: right mouse button"
 		# 	"player is placing a flag"
 		# 	print(board.update_board((x, y), True))
 
 			#############
+	for box in box_matrix:
+		box.draw(matrix)
+		if box.value == "◉":
+			game_over = True
 
 	pygame.display.update()
 
