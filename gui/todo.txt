@@ -1,0 +1,4 @@
+gui
+
+-if player hits a mine, do something.
+-if player wins, do something
