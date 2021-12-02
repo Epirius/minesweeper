@@ -1,4 +1,8 @@
 # minesweeper
-run minesweeper.py to play a terminal version, it currently works fine.
+run minesweeper.py to play a terminal version.
+run gui.py in the gui folder to play a gui version.
 
-run gui.py in the gui folder to play a gui version, it is currently being worked on.
+The terminal version is done, and in a stable state.
+The gui version is not done, it for example lacks flags. it is also possibly buggy.
+
+both versions have to be restarted if you want to play again.
